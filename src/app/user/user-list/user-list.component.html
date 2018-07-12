@@ -6,7 +6,13 @@
     Delete
   </button>
 
-  <button>
+  <button (click)="user.editable = !user.editable" >
     Update
   </button>
+
+  <app-user-edit
+    *ngIf="user.editable"
+    [user]="user"
+    (updateUserEvent)="update($event)"
+  ></app-user-edit>
 </div>
