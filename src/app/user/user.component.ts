@@ -34,4 +34,10 @@ export class UserComponent implements OnInit {
     this.users.push(user);
   }
 
+  destroy(user: User){
+    const index = this.users.indexOf(user);
+    console.log(index);
+    this.users.splice(index,1);
+  }
+
 }
