@@ -17,10 +17,16 @@ export class UserService {
   ) { }
 
   create(user: User) {
-    return this._http.post('/users', user)
-      .pipe(
-        map(data => data.json())
-      ).subscribe(res => console.log(res));
+    let promise = new Promise((resolve, reject) => {
+      this._http.post('/users', user)
+      .toPromise()
+      .then(
+        res => {
+          resolve(res.json());
+        }
+      )
+    });
+    return promise;
   }
 
   destroy(user: User) {
@@ -39,21 +45,15 @@ export class UserService {
 
   getUsers() {
     let promise = new Promise((resolve, reject) => {
-      this._http.get('/users/')
+      this._http.get('/users')
       .toPromise()
       .then(
         res => {
-          console.log(res.json());
-          resolve();
+          resolve(res.json());
         }
       )
     });
     return promise;
-    /*
-    this._http.get('/users/')
-      .pipe(
-        map(data => data.json())
-      ).subscribe(res => console.log(res));*/
   }
 
   getUser(user: User) {

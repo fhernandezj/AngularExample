@@ -10,28 +10,26 @@ import { URLSearchParams } from '@angular/http';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  users: User[] = [
-    new User(1, 'jose', 'alcantara', 'jose@mail.com'),
-    new User(2, 'jose', 'alcantara', 'jose@mail.com'),
-    new User(3, 'jose', 'alcantara', 'jose@mail.com')
-  ];
+  users: User[] = [];
 
   constructor(
     private _userService: UserService
   ) { }
 
   ngOnInit() {
-    //this.getUsers();
+    this.getUsers();
   }
 
   getUsers(){
-    /*this._userService.getUsers()
-      .then(users => console.log(users))*/
+    this._userService.getUsers()
+      .then(users => this.users = <User[]> users)
+      .catch(err => console.log(err));
   }
 
   create(user: User){
-    console.log(user);
-    this.users.push(user);
+    this._userService.create(user)
+    .then(status => this.getUsers())
+    .catch(err => console.log(err))
   }
 
   destroy(user: User){
