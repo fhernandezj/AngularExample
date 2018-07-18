@@ -1,9 +1,14 @@
 <h3>User edit component</h3>
 
 <form (submit)="update()">
-    <input type="text" name="first_name" [(ngModel)]="editUser.first_name">
-    <input type="text" name="last_name" [(ngModel)]="editUser.last_name">
-    <input type="text" name="email" [(ngModel)]="editUser.email">
-    
-    <button type="submit">Update</button>
+    <div class="form-group">
+      <input class="form-control" type="text" name="first_name" [(ngModel)]="editUser.first_name">
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" name="last_name" [(ngModel)]="editUser.last_name">
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" name="email" [(ngModel)]="editUser.email">
+    </div>
+    <button class="btn btn-success" type="submit">Update</button>
   </form>

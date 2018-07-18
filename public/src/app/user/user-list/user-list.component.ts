@@ -17,12 +17,12 @@ export class UserListComponent implements OnInit {
   destroy(user: User){
     const response = confirm('delete?')
     if(response){
-      this.destroyUserEvent.emit();
+      this.destroyUserEvent.emit(user);
     }    
   }
 
-  update(users){
-    this.updateUserEvent.emit(users);
+  update(user){
+    this.updateUserEvent.emit(user);
   }
 
 }

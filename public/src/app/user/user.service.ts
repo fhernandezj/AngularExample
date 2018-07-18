@@ -30,17 +30,29 @@ export class UserService {
   }
 
   destroy(user: User) {
-    return this._http.delete('/users/' + user._id)
-      .pipe(
-        map(data => data.json())
-      ).subscribe(res => console.log(res));
+    let promise = new Promise((resolve, reject) => {
+      this._http.delete('/users/' + user._id)
+      .toPromise()
+      .then(
+        res => {
+          resolve(res.json());
+        }
+      )
+    });
+    return promise;
   }
 
   update(user: User) {
-    return this._http.put('/users/' + user._id, user)
-      .pipe(
-        map(data => data.json())
-      ).subscribe(res => console.log(res));
+    let promise = new Promise((resolve, reject) => {
+      this._http.put('/users/' +  user._id, user)
+      .toPromise()
+      .then(
+        res => {
+          resolve(res.json());
+        }
+      )
+    });
+    return promise;
   }
 
   getUsers() {

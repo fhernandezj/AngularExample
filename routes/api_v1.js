@@ -18,4 +18,27 @@ router.post('/users', (req, res) => {
         else return res.json(user);
     });
 });
+
+router.delete('/users/:id', (req, res) => {
+    console.log(req.params)
+    User.deleteOne({_id: req.params.id}, (err, data) => { 
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(true)
+        }
+    });
+});
+
+router.put('/users/:id', (req, res) => {
+    delete req.body._id;
+    User.update({_id:req.params.id}, req.body, (err, user) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(true)
+        }
+    });
+});
+
 module.exports = router;
